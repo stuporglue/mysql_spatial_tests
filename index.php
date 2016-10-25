@@ -46,4 +46,14 @@ if ( count( $matches ) > 0 ){
 	}
 }
 
-print $q;
+$res = $mysqli->query( $q );
+$row = $res->fetch_row();
+
+$json_res = array(
+	'query' => $q, 
+	'res' => $row,
+	);
+
+	header( 'Content-Type: application/json' );
+print json_encode( $json_res );
+

@@ -1,3 +1,8 @@
+jQuery(document).ready(function(){
+	jQuery('#json1').val('');
+	jQuery('#json2').val('');
+});
+
 jQuery('#submitq').on('click', function(e){
 	jQuery.post(
 	document.location.href,
@@ -7,10 +12,10 @@ jQuery('#submitq').on('click', function(e){
 		json2: jQuery('#json2').val()
 	},
 	function(success){
-		jQuery('#queryres').val( success );
+		jQuery('#queryres').val( success.res );
+		jQuery('#queryrun').val( JSON.stringify( success.query ) );
 	});
 });
-
 
 L.LayerGroup.include({flatten:function(){
 	var finalResult = new L.LayerGroup();
@@ -42,7 +47,7 @@ jQuery('.jsondiv').on('click', setActiveEditLayer);
 jQuery('.jsondiv').on('change', updateShapes);
 
 // Set up the map and layers
-var map = L.map('map').setView([51.505, -0.09], 13);
+var map = L.map('map').setView([46.75, -92.1], 13);
 
 L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 	maxZoom: 19,
@@ -88,6 +93,7 @@ var drawControl = new L.Control.Draw({
 map.addControl(drawControl);
 
 map.on('draw:created', function (e) {
+	console.log("Fired!");
 
 	var type = e.layerType,
 	layer = e.layer;
@@ -98,7 +104,9 @@ map.on('draw:created', function (e) {
 
 	// Do whatever else you need to. (save to db, add to map etc)
 	drawnItems.addLayer(layer);
-	updateActiveDiv();
+	setTimeout(function(){
+		updateActiveDiv();
+	}, 500);
 });
 
 map.on('draw:edited', function (e) {
@@ -163,6 +171,5 @@ function updateShapes(e){
 		fillOpacity: 0.7,
 		opacity: 0.7
 	});
-	window[ layerName ].addLayer( gj );
+	// window[ layerName ].addLayer( gj );
 }
-
