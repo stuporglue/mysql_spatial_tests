@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>MySQL Test Page</title>
+		<link rel="stylesheet" href="//unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+		<link rel="stylesheet" href="//unpkg.com/leaflet-draw@0.4.1/dist/leaflet.draw.css" />
+		<link rel="stylesheet" href="css.css" />
+	</head>
+	<body>
+		<div id="left" class="half">
+			<div id="info">
+				<h1>MySQL Demo</h1>
+				<p>Draw some shapes. Run some queries!</p>
+			</div>
+			<div>
+				<p>
+				Use $1 for JSON 1, use $2 for JSON 2.
+				</p>
+				<h3>Query</h3>
+				<textarea id="query">SELECT INTERSECTS($1,$2)</textarea><br>
+				<input id="submitq" type="submit">
+
+				<h3>Query Run</h3>
+				<textarea id="queryrun"></textarea>
+
+				<h3>Query Result</h3>
+				<textarea id="queryres"></textarea>
+			</div>
+		</div><div id="right" class="half">
+			<div id="map">
+			</div>
+			<div id="json">
+				<h2>JSON 1</h2>
+				<textarea id='json1' class="jsondiv active" name="json1"></textarea>
+
+				<h2>JSON 2</h2>
+				<textarea id='json2' class="jsondiv" name="json2"></textarea>
+			</div>
+		</div>
+
+		<script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script src="//unpkg.com/leaflet@1.0.1/dist/leaflet-src.js"></script>
+		<script src="//unpkg.com/leaflet-draw@0.4.1/dist/leaflet.draw-src.js"></script>
+		<script src="js.js"></script>
+	</body>
+</html>
